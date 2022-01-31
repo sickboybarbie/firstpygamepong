@@ -9,6 +9,8 @@ def ball_animation():
         ball_speed_y *= -1
     if ball.left <= 0 or ball.right >= screen_width:
         ball_speed_x *= -1
+        ball_start()
+
     if ball.colliderect(player) or ball.colliderect(opponent):
         ball_speed_x *= -1
 
@@ -29,8 +31,9 @@ def opponent_ai():
     if opponent.bottom >= screen_height:
         opponent.bottom = screen_height
 
-def ball_restart():
-    global  ball_speed_x, ball_speed_y
+def ball_start():
+    global ball_speed_x, ball_speed_y
+
     ball.center = (screen_width/2, screen_height/2)
     ball_speed_y *= random.choice((1, -1))
     ball_speed_x *= random.choice((1, -1))
@@ -88,6 +91,7 @@ while True:
     ball_animation()
     player_animation()
     opponent_ai()
+
 
 
     # Visuals
