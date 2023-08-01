@@ -1,0 +1,133 @@
+import pygame, random, sys
+from random import randint
+
+pygame.init()
+
+
+# Title and Logo/ set up main window
+pygame.display.set_caption("heartoverflow")
+icon = pygame.image.load('heart normal.png')
+pygame.display.set_icon(icon)
+screen = pygame.display.set_mode((800, 600))
+clock = pygame.time.Clock()
+# background
+background = pygame.image.load('dcklbz3-d68dcd94-3d88-47c1-88ac-7c5edd9e00a3.jpeg')
+
+# remove mouse from screen
+pygame.mouse.set_visible(False)
+# mouse anchor replaced w own anchor
+anchorImg = pygame.image.load('anchor.png').convert_alpha()
+
+def anchor():
+    screen.blit(anchorImg, pygame.mouse.get_pos())
+
+#heart variables
+heart_img = pygame.image.load('heart beating 1 .png').convert_alpha()
+hearts = []  # hold the hearts
+heart_rect = heart_img.get_rect()
+
+
+# creates heart object and put them into the hearts array
+def create_heart(x, y):
+    heart = {
+        "x": heart_rect.x,
+        "y": heart_rect.y,
+        "rect": heart_img.get_rect()
+    }
+
+
+    hearts.append(heart)
+
+
+create_heart(350, 250)
+
+def heart_moving():
+    for heart in hearts:
+        heart["rect"].y += 1
+
+        if heart["rect"].top > 599:
+            heart_rect.bottom = 0
+
+        screen.blit(heart_img, heart["rect"])
+
+#heart_rect = heart.get_rect()
+
+#Timer
+#obstacle_timer = pygame.USEREVENT + 1
+#pygame.time.set_timer(obstacle_timer,900)
+
+
+#heart_rect = heart.get_rect()
+#heartX = [199]
+#heartY = [0]
+#heartX_change = [
+#heartY_speed = 0.8
+#num_of_hearts = 5
+#heart = {
+   # "x": 199,
+   # "y": 0,
+#}
+
+#for i in range:
+    # heart enemy, adding random.randint so appears anywhere
+    #
+    #heart_x_pos[i](random.randint(0, 800))
+    #heartY.append(random.randint(0, 0))
+
+
+
+# Game Loop
+while True:
+    #handling input
+    for event in pygame.event.get():
+        if event.type == pygame.QUIT:
+            pygame.quit()
+            sys.exit()
+
+    #if event.type == obstacle_timer:
+        #obstacle_rect_list.append(heart.get_rect())
+    #if heartY >= 599:
+     #heart_y_pos = 0
+     #heart_x_pos = random.randint(0, 800)
+    #print(len(heartY))
+
+
+    #obstacle movement
+
+
+    screen.fill((0, 0, 0))
+    screen.blit(background, (0, 0))
+    heart_moving()
+
+
+
+
+
+
+    # controlling the hearts and updating them.
+
+
+
+    #heart_rect.y += 2
+    #if heart_rect.top >= 599:
+     #   heart_rect.bottom = 0
+        #heart_x_pos[i] = random.randint(0, 800)
+        #heart_x_pos_rect = random.randint(0,800)
+    #screen.blit(heart, heart_rect)
+
+#create collision
+    mouse_pos = pygame.mouse.get_pos()
+    if heart_rect.collidepoint(mouse_pos):
+        pygame.mouse.get_pressed()
+
+
+
+
+    #heart(heartX, heartY)
+    #heart()
+
+    anchor()
+
+#updating the window
+    pygame.display.update()
+    clock.tick(60)
